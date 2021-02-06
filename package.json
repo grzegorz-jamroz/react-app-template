@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "startnew": "node ./webpack/server/index.js --env.mode development",
-    "start": "webpack-dev-server --open --env.mode development",
+    "start": "node ./webpack/server/index.js --env.mode development",
     "build": "webpack --env.mode production",
     "dev": "webpack --env.mode development",
     "prod": "npm run build"
