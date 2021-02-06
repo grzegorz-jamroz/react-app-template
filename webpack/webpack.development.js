@@ -11,22 +11,18 @@ module.exports = () => {
         },
         {
           test: /\.s[ac]ss$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            "css-loader?sourceMap",
-            {
-              loader: "sass-loader",
-              options: {
-                sourceMap: true,
-                sassOptions: {
-                  includePaths: ["node_modules"],
-                },
-              },
-            },
-          ],
+          use: ["style-loader", "css-loader", "sass-loader"]
         },
         {
-          test: /\.(jpe?g|svg|png|ttf|woff|woff2|eot)$/,
+          test: /\.(ttf|woff|woff2|eot|otf)$/i,
+          loader: "file-loader",
+          options: {
+            outputPath: "fonts",
+            name: "[name].[ext]",
+          },
+        },
+        {
+          test: /\.(jpe?g|svg|png)$/,
           use: "url-loader",
         },
       ],

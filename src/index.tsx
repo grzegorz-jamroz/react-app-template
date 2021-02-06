@@ -1,11 +1,5 @@
-import '../assets/scss/app.scss';
 import React from "react";
 import { render } from "react-dom";
-
-const App = () => {
-    return (
-        <div>Hello World!</div>
-    );
-};
+import App from "./app";
 
 render(<App />, document.getElementById("root"));

@@ -30,17 +30,19 @@ module.exports = () => {
           ],
         },
         {
-          test: /\.(ttf|woff|woff2|eot)$/,
+          test: /\.(ttf|woff|woff2|eot|otf)$/i,
           loader: "file-loader",
           options: {
-            name: "fonts/[name].[ext]",
+            outputPath: "fonts",
+            name: "[name].[ext]",
           },
         },
         {
           test: /\.(jpe?g|svg|png)$/,
           loader: "file-loader",
           options: {
-            name: "images/[name].[ext]",
+            outputPath: "img",
+            name: "[name].[ext]",
           },
         },
       ],
@@ -51,8 +53,9 @@ module.exports = () => {
       }),
       new PurgecssPlugin({
         paths: glob.sync([
-          path.join(__dirname, "../templates/**/*.html.twig"),
-          path.join(__dirname, "../assets/js/**/*.js")
+          path.join(__dirname, "../src/**/*.html"),
+          path.join(__dirname, "../src/**/*.ts"),
+          path.join(__dirname, "../src/**/*.tsx"),
         ]),
       }),
     ],
