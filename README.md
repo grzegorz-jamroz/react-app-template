@@ -11,20 +11,15 @@ yarn install
 ```
 yarn start
 ```
-
-or 
+open in browser
 
 ```
-yarn server
+http://localhost:8000 
 ```
+
+if port 8000 `portfinder` will try to find next empty port
 
 ## Development build
-
-```
-yarn dev
-```
-
-#### Compile assets once 
 
 ```
 yarn dev

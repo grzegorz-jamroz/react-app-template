@@ -12,7 +12,7 @@ const dotenv = require("dotenv").config({
   path: path.join(__dirname, ".env"),
 });
 
-module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
+module.exports = ({ mode, port, presets } = { mode: "production", port: 8000, presets: [] }) => {
   return merge(
     {
       mode,
@@ -20,7 +20,7 @@ module.exports = ({ mode, presets } = { mode: "production", presets: [] }) => {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
       },
       entry: [
-        'webpack-hot-middleware/client?path=http://localhost:4001/__webpack_hmr',
+        `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
         './src/index.tsx',
       ],
       target: 'web',
