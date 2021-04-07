@@ -38,7 +38,7 @@ module.exports = () => {
           },
         },
         {
-          test: /\.(jpe?g|svg|png)$/,
+          test: /\.(jpe?g|svg|png|ico)$/,
           loader: "file-loader",
           options: {
             outputPath: "img",

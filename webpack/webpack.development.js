@@ -22,8 +22,12 @@ module.exports = () => {
           },
         },
         {
-          test: /\.(jpe?g|svg|png)$/,
-          use: "url-loader",
+          test: /\.(jpe?g|svg|png|ico)$/,
+          loader: "file-loader",
+          options: {
+            outputPath: "img",
+            name: "[name].[ext]",
+          },
         },
       ],
     },
