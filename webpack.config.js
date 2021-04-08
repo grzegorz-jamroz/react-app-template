@@ -1,33 +1,23 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { merge } = require("webpack-merge");
-const modeConfig = (env) => require(`./webpack/webpack.${env}`)(env);
+const modeConfig = (env) => require(`./webpack/webpack.${env.mode}`)(env);
 const presetConfig = require("./webpack/loadPresets");
 const Dotenv = require("dotenv-webpack");
 const dotenv = require("dotenv").config({
   path: path.join(__dirname, ".env"),
 });
 
-module.exports = ({ mode, port, presets } = { mode: "production", port: 8000, presets: [] }) => {
-  const entry = [
-    './src/index.tsx',
-  ];
-
-  if (mode === "development") {
-    entry.push(`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`);
-  }
-
+module.exports = ({ mode, port, presets } = { mode: "production", presets: [] }) => {
   return merge(
     {
       mode,
       resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
       },
-      entry: entry,
       target: 'web',
       output: {
         path: path.resolve(__dirname, "dist"),
@@ -61,12 +51,6 @@ module.exports = ({ mode, port, presets } = { mode: "production", port: 8000, pr
         ],
       },
       plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new ReactRefreshWebpackPlugin({
-          overlay: {
-            sockIntegration: 'whm',
-          },
-        }),
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
@@ -87,7 +71,7 @@ module.exports = ({ mode, port, presets } = { mode: "production", port: 8000, pr
         }),
       ],
     },
-    modeConfig(mode),
+    modeConfig({mode, port}),
     presetConfig({ mode, presets })
   );
 };

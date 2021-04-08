@@ -5,6 +5,9 @@ const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 module.exports = () => {
   return {
+    entry: [
+      './src/index.tsx',
+    ],
     output: {
       filename: "[name].[hash].js",
     },

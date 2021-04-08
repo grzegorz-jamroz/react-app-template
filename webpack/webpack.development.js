@@ -1,8 +1,17 @@
+const webpack = require("webpack");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = () => {
   return {
+    entry: [
+      `webpack-hot-middleware/client?path=http://localhost:${port || 8000}/__webpack_hmr`,
+      './src/index.tsx',
+    ],
     devtool: "inline-source-map",
+    devServer: {
+      hot: true
+    },
     module: {
       rules: [
         {
@@ -31,6 +40,14 @@ module.exports = () => {
         },
       ],
     },
-    plugins: [new MiniCssExtractPlugin()],
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new ReactRefreshWebpackPlugin({
+        overlay: {
+          sockIntegration: 'whm',
+        },
+      }),
+      new MiniCssExtractPlugin()
+    ],
   };
 };
