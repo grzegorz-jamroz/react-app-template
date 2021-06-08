@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = () => {
+module.exports = ({ port }) => {
   return {
     entry: [
       `webpack-hot-middleware/client?path=http://localhost:${port || 8000}/__webpack_hmr`,

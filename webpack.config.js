@@ -67,7 +67,7 @@ module.exports = ({ mode, port, presets } = { mode: "production", presets: [] })
         }),
         new Dotenv(),
         new webpack.DefinePlugin({
-          "process.env": dotenv.parsed,
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
       ],
     },
