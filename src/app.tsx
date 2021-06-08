@@ -1,12 +1,14 @@
 import '../assets/scss/app.scss';
 import React from "react";
-import Cards from "./components/Cards";
+import { Router } from "@reach/router"
+import ComponentOne from "./components/ComponentOne";
+import ComponentTwo from "./components/ComponentTwo";
 
 const App = () => (
-    <div>
-        <h1>Hello World2!</h1>
-        <Cards />
-    </div>
+    <Router>
+        <ComponentOne path="/" />
+        <ComponentTwo path="/two" />
+    </Router>
 );
 
 export default App;
