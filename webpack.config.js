@@ -7,9 +7,6 @@ const { merge } = require("webpack-merge");
 const modeConfig = (env) => require(`./webpack/webpack.${env.mode}`)(env);
 const presetConfig = require("./webpack/loadPresets");
 const Dotenv = require("dotenv-webpack");
-const dotenv = require("dotenv").config({
-  path: path.join(__dirname, ".env"),
-});
 
 module.exports = ({ mode, port, presets } = { mode: "production", presets: [] }) => {
   return merge(
@@ -30,8 +27,9 @@ module.exports = ({ mode, port, presets } = { mode: "production", presets: [] })
       module: {
         rules: [
           {
-            test: /\.(ts|tsx)$/,
-            loader: 'awesome-typescript-loader'
+              test: /\.tsx?$/,
+              loader: "ts-loader",
+              exclude: /node_modules/,
           },
           {
             test: /\.(js|jsx)$/,
@@ -67,8 +65,7 @@ module.exports = ({ mode, port, presets } = { mode: "production", presets: [] })
         }),
         new Dotenv(),
         new webpack.DefinePlugin({
-            // "process.env": dotenv.parsed,
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
       ],
     },
